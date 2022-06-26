@@ -25,7 +25,7 @@ public class Comments extends BaseEntity {
     @Temporal(TemporalType.DATE)
     private Date commentDate;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "PRODUCT_ID", nullable = false, updatable = false, foreignKey = @ForeignKey(name = "FK_PRODUCTS_ID"))
     private Products products;
 

@@ -4,11 +4,9 @@ import com.selahattinkabasakal.interprobe.homework1.comments.entity.Comments;
 import com.selahattinkabasakal.interprobe.homework1.generic.entity.BaseEntity;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.validator.constraints.UniqueElements;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.Email;
 import java.io.Serializable;
 import java.util.Set;
@@ -17,7 +15,12 @@ import java.util.Set;
  * @created By Selahattin Kabasakal 26/06/2022
  */
 @Entity
-@Table(name = "USERS")
+@Table(name = "USERS",
+        uniqueConstraints =
+                {
+                        @UniqueConstraint(name = "UK_EMAIL",columnNames={"EMAIL"}),
+                        @UniqueConstraint(name = "UK_PHONE",columnNames={"PHONE"})
+                } )
 @Getter
 @Setter
 public class Users extends BaseEntity {
@@ -29,14 +32,14 @@ public class Users extends BaseEntity {
     private String surname;
 
     @Email
-    @Column(name = "EMAIL", nullable = false, length = 50, unique = true)
+    @Column(name = "EMAIL", nullable = false, length = 50)
     private String email;
 
 
-    @Column(name = "PHONE", nullable = false, length = 15, unique = true)
+    @Column(name = "PHONE", nullable = false, length = 15)
     private String phone;
 
-    @OneToMany(mappedBy = "Users")
+    @OneToMany(mappedBy = "users", fetch = FetchType.LAZY)
     private Set<Comments> comments;
 
 

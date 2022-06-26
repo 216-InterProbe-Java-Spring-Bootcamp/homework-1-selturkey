@@ -30,7 +30,7 @@ public class Products extends BaseEntity {
     @Temporal(TemporalType.DATE)
     private Date expirationDate;
 
-    @OneToMany(mappedBy = "Products")
+    @OneToMany(mappedBy = "products", fetch = FetchType.LAZY)
     private Set<Comments> comments;
 
 }
