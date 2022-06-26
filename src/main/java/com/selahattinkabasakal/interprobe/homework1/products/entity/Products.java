@@ -20,8 +20,8 @@ import java.util.Set;
 @Setter
 public class Products extends BaseEntity {
 
-    @Column(name = "PRODUCT_NAME")
-    private String productName;
+    @Column(name = "NAME")
+    private String name;
 
     @Column(name = "PRICE")
     private BigDecimal price;
