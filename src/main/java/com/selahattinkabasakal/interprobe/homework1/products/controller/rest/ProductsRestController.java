@@ -6,10 +6,12 @@ import com.selahattinkabasakal.interprobe.homework1.products.dto.ProductSaveRequ
 import com.selahattinkabasakal.interprobe.homework1.products.dto.ProductUpdateRequestDto;
 import com.selahattinkabasakal.interprobe.homework1.products.service.ProductsService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -22,6 +24,7 @@ import java.util.List;
 public class ProductsRestController {
 
     private final ProductsService productsService;
+
 
     @GetMapping
     public ResponseEntity findAll(){
@@ -50,4 +53,15 @@ public class ProductsRestController {
         ProductResponseDto productResponseDto= productsService.update(productUpdateRequestDto);
         return ResponseEntity.ok(RestResponse.of(productResponseDto));
     }
+    @GetMapping("/expired")
+    public ResponseEntity findExpiredProducts(@RequestParam("expirationDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date expirationDate){
+        List<ProductResponseDto> productResponseDtoList = productsService.findExpired(expirationDate);
+        return ResponseEntity.ok(RestResponse.of(productResponseDtoList));
+    }
+    @GetMapping("/notExpired")
+    public ResponseEntity findNotExpiredProducts(@RequestParam("expirationDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date expirationDate){
+        List<ProductResponseDto> productResponseDtoList = productsService.findNotExpired(expirationDate);
+        return ResponseEntity.ok(RestResponse.of(productResponseDtoList));
+    }
+
 }

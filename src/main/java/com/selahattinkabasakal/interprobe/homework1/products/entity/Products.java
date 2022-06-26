@@ -2,7 +2,9 @@ package com.selahattinkabasakal.interprobe.homework1.products.entity;
 
 import com.selahattinkabasakal.interprobe.homework1.comments.entity.Comments;
 import com.selahattinkabasakal.interprobe.homework1.generic.entity.BaseEntity;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -18,6 +20,8 @@ import java.util.Set;
 @Table(name = "PRODUCTS")
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Products extends BaseEntity {
 
     @Column(name = "NAME")
@@ -30,7 +34,6 @@ public class Products extends BaseEntity {
     @Temporal(TemporalType.DATE)
     private Date expirationDate;
 
-    @OneToMany(mappedBy = "products", fetch = FetchType.LAZY)
-    private Set<Comments> comments;
+
 
 }

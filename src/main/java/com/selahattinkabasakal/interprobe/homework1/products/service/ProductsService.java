@@ -1,8 +1,10 @@
 package com.selahattinkabasakal.interprobe.homework1.products.service;
 
 
+import com.fasterxml.jackson.databind.DatabindException;
 import com.selahattinkabasakal.interprobe.homework1.generic.exceptions.RecordNotFoundException;
 import com.selahattinkabasakal.interprobe.homework1.products.converter.ProductMapper;
+import com.selahattinkabasakal.interprobe.homework1.products.dao.ProductsDao;
 import com.selahattinkabasakal.interprobe.homework1.products.dto.ProductResponseDto;
 import com.selahattinkabasakal.interprobe.homework1.products.dto.ProductSaveRequestDto;
 import com.selahattinkabasakal.interprobe.homework1.products.dto.ProductUpdateRequestDto;
@@ -11,6 +13,7 @@ import com.selahattinkabasakal.interprobe.homework1.products.service.entityservi
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -21,6 +24,7 @@ import java.util.List;
 public class ProductsService {
 
     private final ProductEntityService productEntityService;
+    private final ProductsDao productsDao;
 
 
     public List<ProductResponseDto> findAll(){
@@ -74,4 +78,16 @@ public class ProductsService {
     }
 
 
+    public List<ProductResponseDto> findExpired(Date expirationDate) {
+        List<Products> productsList = productsDao.findProductsByExpirationDateBefore(expirationDate);
+
+        return ProductMapper.INSTANCE.convertToProductDtoList(productsList);
+    }
+
+    public List<ProductResponseDto> findNotExpired(Date expirationDate) {
+
+        List<Products> productsList = productsDao.findProductsByExpirationDateAfterOrExpirationDateNull(expirationDate);
+
+        return ProductMapper.INSTANCE.convertToProductDtoList(productsList);
+    }
 }

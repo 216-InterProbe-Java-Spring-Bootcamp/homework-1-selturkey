@@ -2,27 +2,27 @@ package com.selahattinkabasakal.interprobe.homework1.users.entity;
 
 import com.selahattinkabasakal.interprobe.homework1.comments.entity.Comments;
 import com.selahattinkabasakal.interprobe.homework1.generic.entity.BaseEntity;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 
+import java.util.List;
 import java.util.Set;
 
 /**
  * @created By Selahattin Kabasakal 26/06/2022
  */
 @Entity
-@Table(name = "USERS",
-        uniqueConstraints =
-                {
-                        @UniqueConstraint(name = "UK_EMAIL",columnNames={"EMAIL"}),
-                        @UniqueConstraint(name = "UK_PHONE",columnNames={"PHONE"})
-                } )
+@Table(name = "USERS")
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Users extends BaseEntity {
 
     @Column(name = "NAME", nullable = false, length = 50)
@@ -38,11 +38,6 @@ public class Users extends BaseEntity {
 
     @Column(name = "PHONE", nullable = false, length = 15)
     private String phone;
-
-    @OneToMany(mappedBy = "users", fetch = FetchType.LAZY)
-    private Set<Comments> comments;
-
-
 
 
 
