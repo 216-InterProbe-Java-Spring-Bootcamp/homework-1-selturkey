@@ -31,6 +31,11 @@
             <artifactId>springdoc-openapi-ui</artifactId>
             <version>1.6.5</version>
         </dependency>
+        <dependency>
+            <groupId>com.github.javafaker</groupId>
+            <artifactId>javafaker</artifactId>
+            <version>0.15</version>
+        </dependency>
 
 
 <!--        <dependency>-->

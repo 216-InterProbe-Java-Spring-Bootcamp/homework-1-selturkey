@@ -1,5 +1,6 @@
 package com.selahattinkabasakal.interprobe.homework1;
 
+import com.github.javafaker.Faker;
 import com.selahattinkabasakal.interprobe.homework1.comments.dao.CommentsDao;
 import com.selahattinkabasakal.interprobe.homework1.comments.entity.Comments;
 import com.selahattinkabasakal.interprobe.homework1.products.dao.ProductsDao;
@@ -15,6 +16,7 @@ import java.math.BigDecimal;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 @SpringBootApplication
 public class Homework1Application implements CommandLineRunner {
@@ -28,6 +30,9 @@ public class Homework1Application implements CommandLineRunner {
     CommentsDao commentsDao;
 
 
+    Faker faker = new Faker();
+
+
     public static void main(String[] args) {
         SpringApplication.run(Homework1Application.class, args);
     }
@@ -35,40 +40,44 @@ public class Homework1Application implements CommandLineRunner {
     public void run(String... strings) throws Exception {
         DateFormat simpleDateFormat=new SimpleDateFormat("yyyy-MM-dd");
 
-        Users user1 = new Users("Sel","Turkey","selturkey@gmail.com","5415910504");
-        usersDao.save(user1);
-
-        Users user2 = new Users("Sel2","Turkey2","selturkey2@gmail.com","54159105042");
-        usersDao.save(user2);
-        Users user3 = new Users("Sel3","Turkey3","selturkey3@gmail.com","541591050423");
-        usersDao.save(user3);
-
-        Products product1 = new Products("Milk", BigDecimal.valueOf(300),simpleDateFormat.parse("2022-06-26"));
-        productsDao.save(product1);
-        Products product2 = new Products("Bread",BigDecimal.valueOf(300),simpleDateFormat.parse("2022-06-22"));
-        productsDao.save(product2);
-        Products product3 = new Products("water",BigDecimal.valueOf(303),simpleDateFormat.parse("2022-06-29"));
-        productsDao.save(product3);
-        Products product4 = new Products("water nulldate",BigDecimal.valueOf(33),null);
-        productsDao.save(product4);
+        for(int i = 1; i<=50; i++){
 
 
+            Users user = new Users(faker.name().firstName(),faker.name().lastName(),faker.bothify("????##@gmail.com"),faker.phoneNumber().cellPhone());
+            usersDao.save(user);
+
+            Products product =
+                    new Products(faker.commerce().productName(), BigDecimal.valueOf(faker.number().numberBetween(1500,125000)),
+                            faker.date().past(100, TimeUnit.DAYS ));
+            productsDao.save(product);
+            Products product2 =
+                    new Products(faker.commerce().productName(), BigDecimal.valueOf(faker.number().numberBetween(1500,125000)),
+                           null);
+            productsDao.save(product2);
+
+            Comments comment = new Comments(faker.lorem().characters(50,150),
+                    faker.date().past(100, TimeUnit.DAYS ),product,user);
+            commentsDao.save(comment);
+            Comments comment2 = new Comments(faker.lorem().characters(50,150),
+                    faker.date().past(100, TimeUnit.DAYS ),product2,user);
+            commentsDao.save(comment2);
+            Comments comment3 = new Comments(faker.lorem().characters(50,150),
+                    faker.date().past(100, TimeUnit.DAYS ),product2,user);
+            commentsDao.save(comment3);
+            Comments comment4 = new Comments(faker.lorem().characters(50,150),
+                    faker.date().past(100, TimeUnit.DAYS ),product2,user);
+            commentsDao.save(comment4);
+
+            Comments comment5 = new Comments(faker.lorem().characters(50,150),
+                    faker.date().past(100, TimeUnit.DAYS ),product,user);
+            commentsDao.save(comment5);
+
+            Comments comment6 = new Comments(faker.lorem().characters(50,150),
+                    faker.date().past(100, TimeUnit.DAYS ),product,user);
+            commentsDao.save(comment6);
 
 
-        Comments comment1 = new Comments("Yorum 1",simpleDateFormat.parse("2022-06-26"),product1,user1);
-        commentsDao.save(comment1);
-
-        Comments comment2 = new Comments("Yorum 2 ",simpleDateFormat.parse("2022-06-20"),product2,user2);
-        commentsDao.save(comment2);
-
-        Comments comment3 = new Comments("Yorum 3 ",simpleDateFormat.parse("2022-06-21"),product2,user3);
-        commentsDao.save(comment3);
-        Comments comment4 = new Comments("Yorum 4 ",simpleDateFormat.parse("2022-06-18"),product1,user3);
-        commentsDao.save(comment4);
-
-        Comments comment5 = new Comments("Yorum 5 ",simpleDateFormat.parse("2022-05-01"),product1,user3);
-        commentsDao.save(comment5);
-
+        }
 
     }
 
