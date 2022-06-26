@@ -4,11 +4,11 @@ import com.selahattinkabasakal.interprobe.homework1.comments.entity.Comments;
 import com.selahattinkabasakal.interprobe.homework1.generic.entity.BaseEntity;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.validator.constraints.UniqueElements;
+
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
-import java.io.Serializable;
+
 import java.util.Set;
 
 /**

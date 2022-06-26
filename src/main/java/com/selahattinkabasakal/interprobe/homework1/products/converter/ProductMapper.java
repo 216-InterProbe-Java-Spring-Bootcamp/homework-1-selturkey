@@ -7,7 +7,7 @@ import com.selahattinkabasakal.interprobe.homework1.products.entity.Products;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
-import org.springframework.context.annotation.Configuration;
+
 
 
 import java.util.List;

@@ -1,6 +1,7 @@
 package com.selahattinkabasakal.interprobe.homework1.products.service;
 
 
+import com.selahattinkabasakal.interprobe.homework1.generic.exceptions.RecordNotFoundException;
 import com.selahattinkabasakal.interprobe.homework1.products.converter.ProductMapper;
 import com.selahattinkabasakal.interprobe.homework1.products.dto.ProductResponseDto;
 import com.selahattinkabasakal.interprobe.homework1.products.dto.ProductSaveRequestDto;
@@ -31,7 +32,7 @@ public class ProductsService {
 
     public ProductResponseDto findById(Long id){
 
-        Products product = productEntityService.findById(id).orElseThrow();
+        Products product = productEntityService.findById(id).orElseThrow(()-> new RecordNotFoundException("Product Not find Id: "+ id));
 
         return ProductMapper.INSTANCE.convertToProductResponseDto(product);
     }
@@ -63,9 +64,7 @@ public class ProductsService {
 
         boolean isExist = productEntityService.isExist(productUpdateRequestDto.getId());
 
-//        if (!isExist){
-//            throw new ItemNotFoundException(CustomerErrorMessage.CUSTOMER_DOES_NOT_EXIST);
-//        }
+        if (!isExist){ throw new RecordNotFoundException("No Record Find to Update Id: "+ productUpdateRequestDto.getId());}
 
         Products product = ProductMapper.INSTANCE.convertToProduct(productUpdateRequestDto);
 

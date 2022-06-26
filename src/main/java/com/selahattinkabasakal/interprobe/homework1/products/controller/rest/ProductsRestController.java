@@ -19,7 +19,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/products")
-public class ProductRestController {
+public class ProductsRestController {
 
     private final ProductsService productsService;
 
@@ -50,8 +50,4 @@ public class ProductRestController {
         ProductResponseDto productResponseDto= productsService.update(productUpdateRequestDto);
         return ResponseEntity.ok(RestResponse.of(productResponseDto));
     }
-
-
-
-
 }
