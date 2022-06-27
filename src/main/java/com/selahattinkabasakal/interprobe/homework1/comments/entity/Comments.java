@@ -3,10 +3,7 @@ package com.selahattinkabasakal.interprobe.homework1.comments.entity;
 import com.selahattinkabasakal.interprobe.homework1.generic.entity.BaseEntity;
 import com.selahattinkabasakal.interprobe.homework1.products.entity.Products;
 import com.selahattinkabasakal.interprobe.homework1.users.entity.Users;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -20,6 +17,7 @@ import java.util.Date;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class Comments extends BaseEntity {
 
     @Column(name = "COMMENT", length = 500)

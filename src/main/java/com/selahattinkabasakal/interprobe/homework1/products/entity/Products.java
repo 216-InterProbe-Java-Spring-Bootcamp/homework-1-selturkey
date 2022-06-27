@@ -2,10 +2,7 @@ package com.selahattinkabasakal.interprobe.homework1.products.entity;
 
 import com.selahattinkabasakal.interprobe.homework1.comments.entity.Comments;
 import com.selahattinkabasakal.interprobe.homework1.generic.entity.BaseEntity;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -22,6 +19,7 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class Products extends BaseEntity {
 
     @Column(name = "NAME")
