@@ -3,9 +3,7 @@
 Start to Project
 
 
-# Entities Created Extends from Generic BaseEntity Abstract Class
-## Entity Relationship Diagram
-![Entity Diagram](/Docs/ScreenShots/EntityRelationshipDiagram.png)
+
 
 Exploring The Stracture
 ==================
@@ -98,4 +96,13 @@ spring.datasource.driver-class-name=org.postgresql.Driver
             <version>0.15</version>
         </dependency>
 ```
+
+# Entities Created Extends from Generic BaseEntity Abstract Class
+## Entity Relationship Diagram
+![Entity Diagram](/Docs/ScreenShots/EntityRelationshipDiagram.png)
+
+## Spring Boot Data Process Flow
+
+![DataProcessFlow](/Docs/ScreenShots/dataProcessflow.png)
+
 
